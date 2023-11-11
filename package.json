@@ -1,0 +1,27 @@
+{
+  "author": "Richard Flosi",
+  "name": "weather-service",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Weather Service Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richard-flosi/weather-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/richard-flosi/weather-service/issues"
+  },
+  "homepage": "https://github.com/richard-flosi/weather-service#readme",
+  "scripts": {
+    "build": "stencil build",
+    "start": "netlify dev",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@ionic/core": "7.5.4",
+    "@stencil-community/router": "1.0.2",
+    "@stencil/core": "2.13.0",
+    "netlify-cli": "17.2.2",
+    "prettier": "3.0.3"
+  }
+}
