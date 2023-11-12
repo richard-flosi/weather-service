@@ -92,7 +92,7 @@ export class PageHome {
           </ion-row>
 
           {this.method === "lat-lon" && (
-            <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-row key="lat-lon" class="ion-align-items-center ion-justify-content-center">
               <ion-col sizeXs="12" sizeLg="6">
                 <ion-input
                   value={this.lat}
@@ -132,7 +132,7 @@ export class PageHome {
           )}
 
           {this.method === "city-state" && (
-            <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-row key="city-state" class="ion-align-items-center ion-justify-content-center">
               <ion-col sizeXs="12" sizeLg="4">
                 <ion-input
                   value={this.city}
@@ -184,7 +184,7 @@ export class PageHome {
           )}
 
           {this.method === "zip-country" && (
-            <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-row key="zip-country" class="ion-align-items-center ion-justify-content-center">
               <ion-col sizeXs="12" sizeLg="6">
                 <ion-input
                   value={this.zip}
@@ -236,7 +236,7 @@ export class PageHome {
         {this.weather &&
           this.weather.current.weather.map((weather) => {
             return (
-              <ion-grid fixed>
+              <ion-grid fixed key={weather.id}>
                 <ion-row>
                   <ion-col>
                     <ion-card color="secondary">
@@ -290,7 +290,7 @@ export class PageHome {
                             </ion-row>
                             {this.weather.alerts.map((alert) => {
                               return (
-                                <ion-row class="ion-align-items-center ion-justify-content-center">
+                                <ion-row key={`${alert.event}-${alert.start}-${alert.end}`} class="ion-align-items-center ion-justify-content-center">
                                   <ion-col size="auto">
                                     <b>{alert.event}</b>
                                     <p>{alert.description}</p>
