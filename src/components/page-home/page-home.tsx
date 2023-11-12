@@ -38,7 +38,7 @@ export class PageHome {
   zipCode: number = null;
 
   async checkWeather() {
-    const url = `/api/lat-lon?lat=${this.lat}&lon=${this.lon}`;
+    const url = `/api/weather?lat=${this.lat}&lon=${this.lon}`;
     const response = await fetch(url);
     const data = await response.json();
     if (response.status === 200) {

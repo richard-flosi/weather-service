@@ -2,7 +2,7 @@ import assert from "node:assert";
 import { describe, it, before, after, mock } from "node:test";
 import { handler } from "./index.js";
 
-describe("GET /api/lat-lon 200 OK", () => {
+describe("GET /api/weather 200 OK", () => {
   const expectedData = {
     lat: 44,
     lon: 99,
@@ -47,7 +47,7 @@ describe("GET /api/lat-lon 200 OK", () => {
   });
 });
 
-describe("GET /api/lat-lon 400 BadRequest", () => {
+describe("GET /api/weather 400 BadRequest", () => {
   it("should return error when lat or lon are missing", async () => {
     const response = await handler({ queryStringParameters: {} });
     assert.equal(response.statusCode, 400);
@@ -70,7 +70,7 @@ describe("GET /api/lat-lon 400 BadRequest", () => {
   });
 });
 
-describe("GET /api/lat-lon 500 Internal Server Error", () => {
+describe("GET /api/weather 500 Internal Server Error", () => {
   before(() => {
     mock.method(global, "fetch", () => {
       throw new Error("Unexpected fetch error");
