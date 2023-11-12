@@ -10,7 +10,7 @@ export class PageAbout {
         <organism-header></organism-header>
 
         <ion-grid fixed>
-          <ion-row className="ion-align-items-center ion-justify-content-center">
+          <ion-row class="ion-align-items-center ion-justify-content-center">
             <ion-col size="12">
               <h1 class="ion-text-center">Check the weather via Open Weather Map API.</h1>
               <p class="ion-text-center">
@@ -22,7 +22,7 @@ export class PageAbout {
             </ion-col>
           </ion-row>
 
-          <ion-row className="ion-align-items-center ion-justify-content-center">
+          <ion-row class="ion-align-items-center ion-justify-content-center">
             <ion-col size="auto">
               <ion-img src="/assets/icon/icon.png" alt="Weather Service" />
             </ion-col>

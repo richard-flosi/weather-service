@@ -27,6 +27,7 @@ export class PageHome {
       wind_gust: number;
       weather: [{ id: number; main: string; description: string; icon: string }];
     };
+    alerts: [{ sender_name: string; event: string; start: number; end: number; description: string; tags: [] }];
     summary: {
       feels: string;
     };
@@ -56,13 +57,13 @@ export class PageHome {
         <organism-header></organism-header>
 
         <ion-grid fixed>
-          <ion-row className="ion-align-items-center ion-justify-content-center">
+          <ion-row class="ion-align-items-center ion-justify-content-center">
             <ion-col size="auto">
               <ion-img src="/assets/icon/icon.png" alt="Weather Service" />
             </ion-col>
           </ion-row>
 
-          <ion-row className="ion-align-items-center ion-justify-content-center">
+          <ion-row class="ion-align-items-center ion-justify-content-center">
             <ion-col size="12">
               <ion-select
                 value={this.method}
@@ -91,7 +92,7 @@ export class PageHome {
           </ion-row>
 
           {this.method === "lat-lon" && (
-            <ion-row className="ion-align-items-center ion-justify-content-center">
+            <ion-row class="ion-align-items-center ion-justify-content-center">
               <ion-col sizeXs="12" sizeLg="6">
                 <ion-input
                   value={this.lat}
@@ -131,7 +132,7 @@ export class PageHome {
           )}
 
           {this.method === "city-state" && (
-            <ion-row className="ion-align-items-center ion-justify-content-center">
+            <ion-row class="ion-align-items-center ion-justify-content-center">
               <ion-col sizeXs="12" sizeLg="4">
                 <ion-input
                   value={this.city}
@@ -183,7 +184,7 @@ export class PageHome {
           )}
 
           {this.method === "zip-country" && (
-            <ion-row className="ion-align-items-center ion-justify-content-center">
+            <ion-row class="ion-align-items-center ion-justify-content-center">
               <ion-col sizeXs="12" sizeLg="6">
                 <ion-input
                   value={this.zip}
@@ -218,7 +219,7 @@ export class PageHome {
             </ion-row>
           )}
 
-          <ion-row className="ion-align-items-center ion-justify-content-center">
+          <ion-row class="ion-align-items-center ion-justify-content-center">
             <ion-col>
               <ion-button
                 expand="full"
@@ -278,6 +279,33 @@ export class PageHome {
                             <ion-col>UV Index: {this.weather.current.uvi}</ion-col>
                           </ion-row>
                         </ion-grid>
+                        {this.weather.alerts && this.weather.alerts.length > 0 && (
+                          <ion-grid>
+                            <ion-row class="ion-align-items-center ion-justify-content-center">
+                              <ion-col size="auto">
+                                <h2>
+                                  <b>Weather Alerts</b>
+                                </h2>
+                              </ion-col>
+                            </ion-row>
+                            {this.weather.alerts.map((alert) => {
+                              return (
+                                <ion-row class="ion-align-items-center ion-justify-content-center">
+                                  <ion-col size="auto">
+                                    <b>{alert.event}</b>
+                                    <p>{alert.description}</p>
+                                    <p>
+                                      Start: {new Date(alert.start * 1000).toLocaleString()} - End: {new Date(alert.end * 1000).toLocaleString()}
+                                    </p>
+                                    <p>
+                                      <i>Reported by: {alert.sender_name}</i>
+                                    </p>
+                                  </ion-col>
+                                </ion-row>
+                              );
+                            })}
+                          </ion-grid>
+                        )}
                       </ion-card-content>
                     </ion-card>
                   </ion-col>
