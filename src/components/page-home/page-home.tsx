@@ -4,7 +4,7 @@ import { Component, Fragment, h, State } from "@stencil/core";
   tag: "page-home",
 })
 export class PageHome {
-  @State() method: "lat-lon" | "city-state" | "zip-code" = "lat-lon";
+  @State() method: "lat-lon" | "city-state" | "zip-country" = "lat-lon";
   @State() weather: {
     lat: number;
     lon: number;
@@ -31,15 +31,13 @@ export class PageHome {
 
   lat: number = null;
   lon: number = null;
-
   city: string = null;
   state: string = null;
-
-  zipCode: number = null;
+  zip: number = null;
+  country: string = null;
 
   async checkWeather() {
-    // TODO get method and other variables to pass to API
-    const url = `/api/weather?method=lat-lon&lat=${this.lat}&lon=${this.lon}`;
+    const url = `/api/weather?method=${this.method}&lat=${this.lat}&lon=${this.lon}&city=${this.city}&state=${this.state}&zip=${this.zip}&country=${this.country}`;
     const response = await fetch(url);
     const data = await response.json();
     if (response.status === 200) {
@@ -66,6 +64,14 @@ export class PageHome {
               <ion-select
                 value={this.method}
                 onIonChange={(event) => {
+                  // reset form variables when the method changes
+                  this.weather = null;
+                  this.lat = null;
+                  this.lon = null;
+                  this.city = null;
+                  this.state = null;
+                  this.zip = null;
+                  this.country = null;
                   this.method = event.detail.value;
                 }}
                 fill="outline"
@@ -75,8 +81,8 @@ export class PageHome {
                 placeholder="Select a method for checking the weather"
               >
                 <ion-select-option value="lat-lon">Latitude & Longitude</ion-select-option>
-                <ion-select-option value="city-state">City, State</ion-select-option>
-                <ion-select-option value="zip-code">Zip Code</ion-select-option>
+                <ion-select-option value="city-state">City, State, & Country</ion-select-option>
+                <ion-select-option value="zip-country">Zip Code & Country</ion-select-option>
               </ion-select>
             </ion-col>
           </ion-row>
@@ -123,7 +129,7 @@ export class PageHome {
 
           {this.method === "city-state" && (
             <ion-row className="ion-align-items-center ion-justify-content-center">
-              <ion-col sizeXs="12" sizeLg="6">
+              <ion-col sizeXs="12" sizeLg="4">
                 <ion-input
                   value={this.city}
                   onIonChange={(event) => {
@@ -139,7 +145,7 @@ export class PageHome {
                 ></ion-input>
               </ion-col>
 
-              <ion-col sizeXs="12" sizeLg="6">
+              <ion-col sizeXs="12" sizeLg="4">
                 <ion-input
                   value={this.state}
                   onIonChange={(event) => {
@@ -154,16 +160,32 @@ export class PageHome {
                   clearInput
                 ></ion-input>
               </ion-col>
+
+              <ion-col sizeXs="12" sizeLg="4">
+                <ion-input
+                  value={this.country}
+                  onIonChange={(event) => {
+                    this.country = event.detail.value;
+                  }}
+                  type="string"
+                  fill="outline"
+                  labelPlacement="stacked"
+                  label="Country"
+                  placeholder="US"
+                  helperText="Enter the name of a Country"
+                  clearInput
+                ></ion-input>
+              </ion-col>
             </ion-row>
           )}
 
-          {this.method === "zip-code" && (
+          {this.method === "zip-country" && (
             <ion-row className="ion-align-items-center ion-justify-content-center">
-              <ion-col size="12">
+              <ion-col sizeXs="12" sizeLg="6">
                 <ion-input
-                  value={this.zipCode}
+                  value={this.zip}
                   onIonChange={(event) => {
-                    this.zipCode = event.detail.value;
+                    this.zip = event.detail.value;
                   }}
                   type="string"
                   fill="outline"
@@ -174,8 +196,25 @@ export class PageHome {
                   clearInput
                 ></ion-input>
               </ion-col>
+
+              <ion-col sizeXs="12" sizeLg="6">
+                <ion-input
+                  value={this.country}
+                  onIonChange={(event) => {
+                    this.country = event.detail.value;
+                  }}
+                  type="string"
+                  fill="outline"
+                  labelPlacement="stacked"
+                  label="Country"
+                  placeholder="US"
+                  helperText="Enter the name of a Country"
+                  clearInput
+                ></ion-input>
+              </ion-col>
             </ion-row>
           )}
+
           <ion-row className="ion-align-items-center ion-justify-content-center">
             <ion-col>
               <ion-button

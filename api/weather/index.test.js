@@ -371,26 +371,3 @@ describe("GET /api/weather?method=city-state&city=Chicago&state=IL&country=US 50
     assert.deepEqual(data, { error: "Internal Server Error" });
   });
 });
-
-describe("GET /api/weather?method=zip-country&zip=32712&country=US 500 Internal Server Error", () => {
-  const expectedLatLon = [];
-  before(() => {
-    mock.method(global, "fetch", () => {
-      return {
-        json: () => {
-          return expectedLatLon;
-        },
-        status: 200,
-      };
-    });
-  });
-  after(() => {
-    mock.reset();
-  });
-  it("should return error when lat, lon not found", async () => {
-    const response = await handler({ queryStringParameters: { method: "zip-country", zip: "32712", country: "US" } });
-    assert.equal(response.statusCode, 500);
-    const data = JSON.parse(response.body);
-    assert.deepEqual(data, { error: "Internal Server Error" });
-  });
-});

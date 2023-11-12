@@ -167,11 +167,7 @@ async function getLatLonByZipCountry({ zip, country }) {
     const url = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},${country}&appid=${OPEN_WEATHER_MAP_API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
-    if (data.length === 1) {
-      return data[0];
-    } else {
-      throw new Error(`Not Found: ${q}`);
-    }
+    return data;
   } catch (error) {
     throw error;
   }
