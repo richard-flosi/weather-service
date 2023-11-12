@@ -18,6 +18,7 @@ export class AppRoot {
 
         <ion-router root="/" useHash={false} onIonRouteWillChange={dismissMenu}>
           <ion-route url="/" component="page-home" />
+          <ion-route url="/about" component="page-about" />
         </ion-router>
 
         <ion-nav id="ion-nav" />

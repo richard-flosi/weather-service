@@ -15,6 +15,8 @@ export namespace Components {
     }
     interface OrganismMenu {
     }
+    interface PageAbout {
+    }
     interface PageHome {
     }
 }
@@ -43,6 +45,12 @@ declare global {
         prototype: HTMLOrganismMenuElement;
         new (): HTMLOrganismMenuElement;
     };
+    interface HTMLPageAboutElement extends Components.PageAbout, HTMLStencilElement {
+    }
+    var HTMLPageAboutElement: {
+        prototype: HTMLPageAboutElement;
+        new (): HTMLPageAboutElement;
+    };
     interface HTMLPageHomeElement extends Components.PageHome, HTMLStencilElement {
     }
     var HTMLPageHomeElement: {
@@ -54,6 +62,7 @@ declare global {
         "organism-footer": HTMLOrganismFooterElement;
         "organism-header": HTMLOrganismHeaderElement;
         "organism-menu": HTMLOrganismMenuElement;
+        "page-about": HTMLPageAboutElement;
         "page-home": HTMLPageHomeElement;
     }
 }
@@ -67,6 +76,8 @@ declare namespace LocalJSX {
     }
     interface OrganismMenu {
     }
+    interface PageAbout {
+    }
     interface PageHome {
     }
     interface IntrinsicElements {
@@ -74,6 +85,7 @@ declare namespace LocalJSX {
         "organism-footer": OrganismFooter;
         "organism-header": OrganismHeader;
         "organism-menu": OrganismMenu;
+        "page-about": PageAbout;
         "page-home": PageHome;
     }
 }
@@ -85,6 +97,7 @@ declare module "@stencil/core" {
             "organism-footer": LocalJSX.OrganismFooter & JSXBase.HTMLAttributes<HTMLOrganismFooterElement>;
             "organism-header": LocalJSX.OrganismHeader & JSXBase.HTMLAttributes<HTMLOrganismHeaderElement>;
             "organism-menu": LocalJSX.OrganismMenu & JSXBase.HTMLAttributes<HTMLOrganismMenuElement>;
+            "page-about": LocalJSX.PageAbout & JSXBase.HTMLAttributes<HTMLPageAboutElement>;
             "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;
         }
     }

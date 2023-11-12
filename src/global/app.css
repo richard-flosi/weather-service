@@ -1,5 +1,5 @@
 /*
-  Global App CSS
+  Global App CSS (Document Level Styles)
   ----------------------
   Use this file for styles that should be applied to all components.
   For example, "font-family" within the "body" selector is a CSS property
@@ -7,8 +7,6 @@
 
   Any global CSS variables should also be applied here.
 */
-
-/* Document Level Styles */
 
 /*
   The imports below are needed to include our light dom css for global styles such as fonts and colors.
@@ -36,6 +34,9 @@
   The CSS Variables below can be used to theme your app.
   For more info on CSS variables check out:
   https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables
+
+  More info about color theming using Ionic:
+  https://ionicframework.com/docs/theming/color-generator
 */
 
 body {
@@ -44,60 +45,4 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-:root {
-  --ion-color-primary: #333333;
-  --ion-color-primary-rgb: 51, 51, 51;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #2d2d2d;
-  --ion-color-primary-tint: #474747;
-
-  --ion-color-secondary: #666666;
-  --ion-color-secondary-rgb: 102, 102, 102;
-  --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #5a5a5a;
-  --ion-color-secondary-tint: #757575;
-
-  --ion-color-tertiary: #999999;
-  --ion-color-tertiary-rgb: 153, 153, 153;
-  --ion-color-tertiary-contrast: #000000;
-  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #878787;
-  --ion-color-tertiary-tint: #a3a3a3;
-
-  --ion-color-success: #2dd36f;
-  --ion-color-success-rgb: 45, 211, 111;
-  --ion-color-success-contrast: #000000;
-  --ion-color-success-contrast-rgb: 0, 0, 0;
-  --ion-color-success-shade: #28ba62;
-  --ion-color-success-tint: #42d77d;
-
-  --ion-color-warning: #ffc409;
-  --ion-color-warning-rgb: 255, 196, 9;
-  --ion-color-warning-contrast: #000000;
-  --ion-color-warning-contrast-rgb: 0, 0, 0;
-  --ion-color-warning-shade: #e0ac08;
-  --ion-color-warning-tint: #ffca22;
-
-  --ion-color-danger: #eb445a;
-  --ion-color-danger-rgb: 235, 68, 90;
-  --ion-color-danger-contrast: #ffffff;
-  --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #cf3c4f;
-  --ion-color-danger-tint: #ed576b;
-
-  --ion-color-medium: #92949c;
-  --ion-color-medium-rgb: 146, 148, 156;
-  --ion-color-medium-contrast: #000000;
-  --ion-color-medium-contrast-rgb: 0, 0, 0;
-  --ion-color-medium-shade: #808289;
-  --ion-color-medium-tint: #9d9fa6;
-
-  --ion-color-light: #f4f5f8;
-  --ion-color-light-rgb: 244, 245, 248;
-  --ion-color-light-contrast: #000000;
-  --ion-color-light-contrast-rgb: 0, 0, 0;
-  --ion-color-light-shade: #d7d8da;
-  --ion-color-light-tint: #f5f6f9;
-}
+@import "./variables.css";

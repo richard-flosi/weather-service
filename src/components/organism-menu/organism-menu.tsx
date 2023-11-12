@@ -23,10 +23,13 @@ export class OrganismMenu {
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
-        <ion-content color="primary">
-          <ion-list color="primary" class="ion-no-padding">
-            <ion-item color="primary" href="/">
+        <ion-content color="light">
+          <ion-list color="light" class="ion-no-padding">
+            <ion-item color="light" href="/">
               Home
+            </ion-item>
+            <ion-item color="light" href="/about">
+              About
             </ion-item>
           </ion-list>
         </ion-content>
