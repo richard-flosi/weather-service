@@ -15,7 +15,8 @@
   "scripts": {
     "build": "stencil build",
     "start": "netlify dev",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "test": "node --test --experimental-test-coverage"
   },
   "devDependencies": {
     "@ionic/core": "7.5.4",

@@ -26,17 +26,14 @@ export async function handler(request) {
   try {
     const exclude = "minutely,hourly,daily";
     const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&appid=${OPEN_WEATHER_MAP_API_KEY}`;
-    // console.log(url);
     const response = await fetch(url);
-    // console.log(response);
     const data = await response.json();
-    // console.log(data);
     return {
       statusCode: 200,
       body: JSON.stringify(data),
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Internal Server Error" }),
