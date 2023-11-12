@@ -31,7 +31,7 @@ export async function handler(request) {
 }
 
 function getFeels(weather) {
-  // tempurature unit is kevlin
+  // temperature unit is kevlin
   if (weather.current.temp >= 303.15) {
     return "Hot";
   } else if (weather.current.temp >= 293.15) {

@@ -15,8 +15,8 @@ export class PageAbout {
               <h1 class="ion-text-center">Check the weather via Open Weather Map API.</h1>
               <p class="ion-text-center">
                 For more information on the Open Weather Map API see the documentation at{" "}
-                <a href="https://openweathermap.org/api/one-call-3" target="_blank">
-                  Open Weather API - One Call API 3.0
+                <a href="https://openweathermap.org/api/" target="_blank">
+                  Open Weather API
                 </a>
               </p>
             </ion-col>
