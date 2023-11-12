@@ -1,4 +1,4 @@
-import { Component, Fragment, h, State } from "@stencil/core";
+import { Component, h, State } from "@stencil/core";
 
 @Component({
   tag: "page-home",
@@ -26,6 +26,9 @@ export class PageHome {
       wind_deg: number;
       wind_gust: number;
       weather: [{ id: number; main: string; description: string; icon: string }];
+    };
+    summary: {
+      feels: string;
     };
   } = null;
 
@@ -229,43 +232,59 @@ export class PageHome {
           </ion-row>
         </ion-grid>
 
-        {this.weather && (
-          <ion-grid fixed>
-            <ion-row className="ion-align-items-center ion-justify-content-center">
-              <ion-col>
-                <h2>Weather Report</h2>
-                <p>Latitude: {this.weather.lat}</p>
-                <p>Longitude: {this.weather.lon}</p>
-                <p>Timezone: {this.weather.timezone}</p>
-                <p>Timezone Offset: {this.weather.timezone_offset}</p>
-                <p>Current DT: {this.weather.current.dt}</p>
-                <p>Current Sunrise: {this.weather.current.sunrise}</p>
-                <p>Current Sunset: {this.weather.current.sunset}</p>
-                <p>Current Temp: {this.weather.current.temp}</p>
-                <p>Current Feels Like: {this.weather.current.feels_like}</p>
-                <p>Current Pressure: {this.weather.current.pressure}</p>
-                <p>Current Humidity: {this.weather.current.humidity}</p>
-                <p>Current Dew Point: {this.weather.current.dew_point}</p>
-                <p>Current UVI: {this.weather.current.uvi}</p>
-                <p>Current Clouds: {this.weather.current.clouds}</p>
-                <p>Current Visibility: {this.weather.current.visibility}</p>
-                <p>Current Wind Speed: {this.weather.current.wind_speed}</p>
-                <p>Current Wind Deg: {this.weather.current.wind_deg}</p>
-                <p>Current Wind Gust: {this.weather.current.wind_gust}</p>
-                {this.weather.current.weather.map((weather) => {
-                  return (
-                    <Fragment>
-                      <p>Current Weather Id: {weather.id}</p>
-                      <p>Current Weather Main: {weather.main}</p>
-                      <p>Current Weather Description: {weather.description}</p>
-                      <p>Current Weather Icon: {weather.icon}</p>
-                    </Fragment>
-                  );
-                })}
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        )}
+        {this.weather &&
+          this.weather.current.weather.map((weather) => {
+            return (
+              <ion-grid fixed>
+                <ion-row>
+                  <ion-col>
+                    <ion-card color="secondary">
+                      <ion-card-header>
+                        <ion-grid>
+                          <ion-row class="ion-align-items-center">
+                            <ion-col size="auto">
+                              <ion-img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={weather.description} style={{ width: "100px", height: "100px" }} />
+                            </ion-col>
+                            <ion-col>
+                              <ion-card-title>Current Weather Conditions</ion-card-title>
+                              <ion-card-subtitle>
+                                {weather.main} - {weather.description} - {this.weather.summary.feels} - Tempurature: {this.weather.current.temp}ºK - Feels Like:{" "}
+                                {this.weather.current.feels_like}ºK - Visibility: {this.weather.current.visibility} meters
+                              </ion-card-subtitle>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <ion-grid>
+                          <ion-row>
+                            <ion-col>
+                              Latitude / Longitude: {this.weather.lat} / {this.weather.lon}
+                            </ion-col>
+                            <ion-col>Sunrise: {new Date(this.weather.current.sunrise * 1000).toLocaleString()}</ion-col>
+                            <ion-col>Sunset: {new Date(this.weather.current.sunset * 1000).toLocaleString()}</ion-col>
+                            <ion-col>Date Time: {new Date(this.weather.current.dt * 1000).toLocaleString()}</ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col>Clouds: {this.weather.current.clouds}%</ion-col>
+                            <ion-col>Wind Speed: {this.weather.current.wind_speed} meter/sec</ion-col>
+                            <ion-col>Wind Deg: {this.weather.current.wind_deg}º</ion-col>
+                            <ion-col>Wind Gust: {this.weather.current.wind_gust} meter/sec</ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col>Pressure: {this.weather.current.pressure} hPa</ion-col>
+                            <ion-col>Humidity: {this.weather.current.humidity}%</ion-col>
+                            <ion-col>Dew Point: {this.weather.current.dew_point}ºK</ion-col>
+                            <ion-col>UV Index: {this.weather.current.uvi}</ion-col>
+                          </ion-row>
+                        </ion-grid>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            );
+          })}
 
         <organism-footer></organism-footer>
       </ion-content>

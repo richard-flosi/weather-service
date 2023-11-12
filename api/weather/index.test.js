@@ -3,7 +3,7 @@ import { describe, it, before, after, mock } from "node:test";
 import { handler } from "./index.js";
 
 describe("GET /api/weather?method=lat-lon&lat=44&lon=99 200 OK", () => {
-  const expectedData = {
+  const weatherData = {
     lat: 44,
     lon: 99,
     timezone: "Asia/Ulaanbaatar",
@@ -26,11 +26,17 @@ describe("GET /api/weather?method=lat-lon&lat=44&lon=99 200 OK", () => {
       weather: [{ id: 804, main: "Clouds", description: "overcast clouds", icon: "04d" }],
     },
   };
+  const expectedData = {
+    ...weatherData,
+    summary: {
+      feels: "Ice",
+    },
+  };
   before(() => {
     mock.method(global, "fetch", () => {
       return {
         json: () => {
-          return expectedData;
+          return weatherData;
         },
         status: 200,
       };
@@ -88,6 +94,12 @@ describe("GET /api/weather?method=city-state&city=Chicago&state=IL&country=US 20
       ],
     },
   };
+  const expectedData = {
+    ...expectedWeather,
+    summary: {
+      feels: "Cold",
+    },
+  };
   before(() => {
     mock.method(global, "fetch", (url) => {
       if (url.startsWith("http://api.openweathermap.org/geo/1.0/direct")) {
@@ -114,7 +126,7 @@ describe("GET /api/weather?method=city-state&city=Chicago&state=IL&country=US 20
     const response = await handler({ queryStringParameters: { method: "city-state", city: "Chicago", state: "IL", country: "US" } });
     assert.equal(response.statusCode, 200);
     const data = JSON.parse(response.body);
-    assert.deepEqual(data, expectedWeather);
+    assert.deepEqual(data, expectedData);
   });
 });
 
@@ -138,7 +150,7 @@ describe("GET /api/weather?method=city-state&city=London&country=GB 200 OK", () 
       dt: 1699811469,
       sunrise: 1699773161,
       sunset: 1699805800,
-      temp: 282.01,
+      temp: 294.15,
       feels_like: 280.96,
       pressure: 1002,
       humidity: 90,
@@ -159,6 +171,12 @@ describe("GET /api/weather?method=city-state&city=London&country=GB 200 OK", () 
       rain: {
         "1h": 0.28,
       },
+    },
+  };
+  const expectedData = {
+    ...expectedWeather,
+    summary: {
+      feels: "Nice",
     },
   };
   before(() => {
@@ -187,7 +205,7 @@ describe("GET /api/weather?method=city-state&city=London&country=GB 200 OK", () 
     const response = await handler({ queryStringParameters: { method: "city-state", city: "London", country: "GB" } });
     assert.equal(response.statusCode, 200);
     const data = JSON.parse(response.body);
-    assert.deepEqual(data, expectedWeather);
+    assert.deepEqual(data, expectedData);
   });
 });
 
@@ -210,7 +228,7 @@ describe("GET /api/weather?method=zip-country&zip=32712&country=US 200 OK", () =
       dt: 1699810204,
       sunrise: 1699789585,
       sunset: 1699828445,
-      temp: 296.16,
+      temp: 304.15,
       feels_like: 296.94,
       pressure: 1021,
       humidity: 93,
@@ -229,6 +247,12 @@ describe("GET /api/weather?method=zip-country&zip=32712&country=US 200 OK", () =
           icon: "04d",
         },
       ],
+    },
+  };
+  const expectedData = {
+    ...expectedWeather,
+    summary: {
+      feels: "Hot",
     },
   };
   before(() => {
@@ -257,7 +281,7 @@ describe("GET /api/weather?method=zip-country&zip=32712&country=US 200 OK", () =
     const response = await handler({ queryStringParameters: { method: "zip-country", zip: "32712", country: "US" } });
     assert.equal(response.statusCode, 200);
     const data = JSON.parse(response.body);
-    assert.deepEqual(data, expectedWeather);
+    assert.deepEqual(data, expectedData);
   });
 });
 

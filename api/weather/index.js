@@ -5,9 +5,15 @@ export async function handler(request) {
     const { method, lat, lon, city, state, zip, country } = sanitizeAndValidateInputs(request.queryStringParameters);
     try {
       const data = await getWeather({ method, lat, lon, city, state, zip, country });
+      const feels = getFeels(data);
       return {
         statusCode: 200,
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          summary: {
+            feels,
+          },
+        }),
       };
     } catch (error) {
       // console.log(error);
@@ -21,6 +27,19 @@ export async function handler(request) {
       statusCode: 400,
       body: JSON.stringify({ error: error.message }),
     };
+  }
+}
+
+function getFeels(weather) {
+  // tempurature unit is kevlin
+  if (weather.current.temp >= 303.15) {
+    return "Hot";
+  } else if (weather.current.temp >= 293.15) {
+    return "Nice";
+  } else if (weather.current.temp >= 283.15) {
+    return "Cold";
+  } else {
+    return "Ice";
   }
 }
 
